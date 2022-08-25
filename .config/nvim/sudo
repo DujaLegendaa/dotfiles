@@ -1,0 +1,2 @@
+nameserver 192.168.0.23 /etc/resolv.conf
+nameserver 192.168.0.23 /etc/resolv.conf
