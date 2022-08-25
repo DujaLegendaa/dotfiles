@@ -1,0 +1,33 @@
+Config { overrideRedirect = False
+       , font     = "xft:Fira Code Nerd Font:size=10:style=Regular:antialias=true:hinting=true,Font Awesome 6 Brands:style=Regular:size=9,Font Awesome 6 Free:style=Solid:size=9"
+       , bgColor  = "#282a36"
+       , fgColor  = "#f8f8f2"
+       , position = TopW L 100
+       , commands = [
+                    Run Com "echo" ["\xf2db"] "microchip" 3600
+                    , Run Com "echo" ["\xf538"] "ram" 3600
+                    , Run Com "echo" ["\xf0a0"] "hdd" 3600
+                    , Run Com "echo" ["\xf017"] "clock" 3600
+                    , Run Com "echo" ["\xf0f3"] "bell" 3600
+                        -- Cpu usage in percent
+                    , Run MultiCpu ["-t", "(<total>%)","-H","50","--high","red"] 20
+                    , Run MultiCoreTemp ["-t", "<avg>°C"] 20
+
+                        -- Ram used number and percent
+                    , Run Memory ["-t", "<used>M (<usedratio>%)"] 20
+
+                        -- Disk space free
+                    , Run DiskU [("/home", "<free> free")] [] 60
+
+                    , Run Network "enp31s0" ["-t", "\xf358 <rx>KB \xf35b <tx>KB"] 20
+
+                        -- Check for pacman updates (script found in .local/bin)
+                    , Run Com "sh" ["-c", "checkupdates | wc -l"] "pacupdate" 36000
+
+                    , Run Date "%b %d %Y - (%H:%M) " "date" 50
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ <box type=Bottom width=2 mt=2 color=#ff7878><fc=#ff7878>%bell% %pacupdate%</fc></box> | <box type=Bottom width=2 mt=2 color=#ffe0ac><fc=#ffe0ac>%microchip% %multicpu% %multicoretemp%</fc></box> | <box type=Bottom width=2 mt=2 color=#c9e4c5><fc=#c9e45c>%ram% %memory%</fc></box> | <box type=Bottom width=2 mt=2 color=#b5eaea><fc=#b5eaea>%hdd% %disku%</fc></box> | <box type=Bottom width=2 mt=2 color=#a6b1e1><fc=#a6b1e1>%enp31s0%</fc></box> | <box type=Bottom width=2 mt=2 color=#e1ccec><fc=#e1ccec>%clock% %date%</fc></box> "
+       }
