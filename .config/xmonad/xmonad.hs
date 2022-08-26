@@ -38,8 +38,7 @@ mySpacing = 6
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "lxsession"
-  spawnOnce "picom"
-  spawnOnce "volumeicon"
+  spawnOnce "picom --experimental-backends"
   setWMName "LG3D"
 
 
@@ -104,3 +103,7 @@ main = xmonad
         , normalBorderColor = "#282a36"
         , focusedBorderColor = "#f8f8f2"
       }
+      `additionalKeysP`
+      [ ("<Print>", spawn "flameshot gui")
+        
+      ]
