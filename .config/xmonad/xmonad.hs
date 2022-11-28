@@ -7,6 +7,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.ManageHelpers
 
 -- Hooks
 import XMonad.Hooks.SetWMName 
@@ -38,7 +39,11 @@ mySpacing = 6
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "lxsession"
+  spawnOnce "xrandr --output DP-0 --mode 1920x1080 --rate 143.85"
   spawnOnce "picom --experimental-backends"
+  spawnOnce "brave"
+  spawnOnce "fluent-reader"
+  spawnOnce "nicotine -s"
   setWMName "LG3D"
 
 
@@ -52,11 +57,21 @@ myLayoutHook = smartSpacingWithEdge mySpacing $ tiled ||| Mirror tiled ||| Full 
     delta = 3/100
 
 
-myWorkspaces = [" \xf268 ", " \xf121 ", " \xf392 ", " \xf001 "]
+myWorkspaces = [" \xf268 ", " \xf121 ", " \xf392 ", " \xf143 ", "\xf11b ", "\xf001 "]
 myWorkspaceIndices = M.fromList $ zip myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
+
+myManageHook :: ManageHook
+myManageHook = composeAll
+  [ className =? "Brave-browser" --> doShift (myWorkspaces !! 0) 
+  , className =? "discord" --> doShift (myWorkspaces !!  2)
+  , className =? "fluent-reader" --> doShift (myWorkspaces !!  3)
+  , className =? "Lutris" --> doShift (myWorkspaces !! 4)
+  , className =? "Nicotine" --> doShift (myWorkspaces !! 5)
+  ]
+
 
 myXmobarPP :: PP
 myXmobarPP = def
@@ -102,6 +117,7 @@ main = xmonad
         , borderWidth = myBorderWidth
         , normalBorderColor = "#282a36"
         , focusedBorderColor = "#f8f8f2"
+        , manageHook = myManageHook
       }
       `additionalKeysP`
       [ ("<Print>", spawn "flameshot gui")
