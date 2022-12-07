@@ -1,0 +1,41 @@
+# Random Photo Every Login
+feh --bg-fill --randomize ~/Pictures/Wallpapers/* &
+
+# feh --bg-fill ~/Pictures/wallpapers/mac/Mojave\ Night.jpg --bg-fill ~/Pictures/wallpapers/macos-cataline-night-6k.jpg/
+
+# Monitor Config
+# xrandr --auto --output DVI-D-0 --mode 2560x1440 --left-of HDMI-0
+ 
+xrandr --auto --output HDMI-0 --mode 1920x1080 --rate 144.01
+
+# Don't Randomly Turn off
+xset s off
+xset -dpms
+xset s noblank
+
+# Speedy keys
+xset r rate 210 40
+
+# Environment variables set everywhere
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="brave"
+
+# For QT Themes
+# export QT_QPA_PLATFORMTHEME=qt5ct
+
+# XDG Paths
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+
+# Hide mouse when typing
+# xbanish &
+
+# Screenshots
+flameshot &
+
+# swap escape and caps
+setxkbmap -option caps:swapescape
+

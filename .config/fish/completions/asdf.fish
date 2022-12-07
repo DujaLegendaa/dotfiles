@@ -1,0 +1,1 @@
+/home/duja-pc/.asdf/completions/asdf.fish
