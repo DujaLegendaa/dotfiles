@@ -39,10 +39,8 @@ mySpacing = 6
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "lxsession"
-  spawnOnce "xrandr --output DP-0 --mode 1920x1080 --rate 143.85"
   spawnOnce "picom --experimental-backends"
   spawnOnce "brave"
-  spawnOnce "fluent-reader"
   spawnOnce "nicotine -s"
   setWMName "LG3D"
 

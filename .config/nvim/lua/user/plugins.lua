@@ -92,6 +92,20 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim"
 
+  -- Clojure
+  use "Olical/conjure"
+  use "tpope/vim-dispatch"
+  use "radenling/vim-dispatch-neovim"
+  use "clojure-vim/vim-jack-in"
+  use "guns/vim-sexp"
+  use "tpope/vim-sexp-mappings-for-regular-people"
+
+  -- Arduino
+  use "stevearc/vim-arduino"
+
+  -- Markdown
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
