@@ -1,4 +1,8 @@
 import XMonad
+import System.Process (readProcess)
+import XMonad.Util.Run (runProcessWithInput)
+
+import Data.List (isPrefixOf)
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
@@ -99,6 +103,28 @@ myXmobarPP = def
     red      = xmobarColor "#ff5555" ""
     lowWhite = xmobarColor "#bbbbbb" ""
 
+extractLayoutCode :: String -> String
+extractLayoutCode output = 
+  let lines' = lines output
+      layoutLine = head $ filter (isPrefixOf "layout:") lines'
+  in last $ words layoutLine
+
+switchKeyboardLayout :: X ()
+switchKeyboardLayout = do
+  -- Read current layout
+  currentLayout <- liftIO $ runProcessWithInput "setxkbmap" ["-query"] ""
+
+  -- Extract the current layout code
+  let layoutCode = extractLayoutCode currentLayout
+
+  -- Switch to the other layout
+  let newLayoutCode = if layoutCode == "us" then "rs" else "us"
+  if layoutCode == "us"
+    then spawn "setxkbmap -layout rs -variant alternatequotes"
+    else spawn "setxkbmap -layout us"
+
+
+
 main :: IO ()
 main = xmonad 
       . ewmhFullscreen 
@@ -118,6 +144,6 @@ main = xmonad
         , manageHook = myManageHook
       }
       `additionalKeysP`
-      [ ("<Print>", spawn "flameshot gui")
-        
+      [ ("<Print>", spawn "flameshot gui"),
+        ("M-<Tab>", switchKeyboardLayout)
       ]

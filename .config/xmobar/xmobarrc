@@ -9,6 +9,7 @@ Config { overrideRedirect = False
                     , Run Com "echo" ["\xf0a0"] "hdd" 3600
                     , Run Com "echo" ["\xf017"] "clock" 3600
                     , Run Com "echo" ["\xf0f3"] "bell" 3600
+                    , Run Com "echo" ["\xfe0f"] "keyboard" 3600
                         -- Cpu usage in percent
                     , Run MultiCpu ["-t", "(<total>%)","-H","50","--high","red"] 20
                     , Run MultiCoreTemp ["-t", "<avg>°C"] 20
@@ -25,9 +26,11 @@ Config { overrideRedirect = False
                     , Run Com "sh" ["-c", "checkupdates | wc -l"] "pacupdate" 36000
 
                     , Run Date "%b %d %Y - (%H:%M) " "date" 50
+                    , Run Kbd [ ("us", "US") 
+                              , ("rs(alternatequotes)", "RS Cirilic")] 
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ <box type=Bottom width=2 mt=2 color=#ff7878><fc=#ff7878>%bell% %pacupdate%</fc></box> | <box type=Bottom width=2 mt=2 color=#ffe0ac><fc=#ffe0ac>%microchip% %multicpu% %multicoretemp%</fc></box> | <box type=Bottom width=2 mt=2 color=#c9e4c5><fc=#c9e45c>%ram% %memory%</fc></box> | <box type=Bottom width=2 mt=2 color=#b5eaea><fc=#b5eaea>%hdd% %disku%</fc></box> | <box type=Bottom width=2 mt=2 color=#a6b1e1><fc=#a6b1e1>%enp31s0%</fc></box> | <box type=Bottom width=2 mt=2 color=#e1ccec><fc=#e1ccec>%clock% %date%</fc></box> "
+       , template = "%XMonadLog% }{ <box type=Bottom width=2 mt=2 color=#ff7878><fc=#ff7878>%bell% %pacupdate%</fc></box> | <box type=Bottom width=2 mt=2 color=#ffe0ac><fc=#ffe0ac>%keyboard% %kbd%</fc></box> | <box type=Bottom width=2 mt=2 color=#ffe0ac><fc=#ffe0ac>%microchip% %multicpu% %multicoretemp%</fc></box> | <box type=Bottom width=2 mt=2 color=#c9e4c5><fc=#c9e45c>%ram% %memory%</fc></box> | <box type=Bottom width=2 mt=2 color=#b5eaea><fc=#b5eaea>%hdd% %disku%</fc></box> | <box type=Bottom width=2 mt=2 color=#a6b1e1><fc=#a6b1e1>%enp31s0%</fc></box> | <box type=Bottom width=2 mt=2 color=#e1ccec><fc=#e1ccec>%clock% %date%</fc></box> "
        }
