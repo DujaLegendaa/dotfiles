@@ -1,7 +1,6 @@
 import XMonad
 import System.Process (readProcess)
 import XMonad.Util.Run (runProcessWithInput)
-
 import Data.List (isPrefixOf)
 
 import XMonad.Layout.Spacing
@@ -18,7 +17,6 @@ import XMonad.Hooks.SetWMName
 
 -- Utilities
 import XMonad.Util.EZConfig
-import XMonad.Util.Ungrab
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Loggers
 import qualified Data.Map as M
@@ -46,6 +44,7 @@ myStartupHook = do
   spawnOnce "picom --experimental-backends"
   spawnOnce "brave"
   spawnOnce "nicotine -s"
+  spawnOnce "redshift"
   setWMName "LG3D"
 
 

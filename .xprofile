@@ -1,12 +1,12 @@
 # Random Photo Every Login
-feh --bg-fill --randomize ~/Pictures/Wallpapers/* &
+feh --bg-fill --randomize ~/Pictures/Wallpapers/miata.png &
 
 # feh --bg-fill ~/Pictures/wallpapers/mac/Mojave\ Night.jpg --bg-fill ~/Pictures/wallpapers/macos-cataline-night-6k.jpg/
 
 # Monitor Config
 # xrandr --auto --output DVI-D-0 --mode 2560x1440 --left-of HDMI-0
  
-xrandr --auto --output HDMI-0 --mode 1920x1080 --rate 144.01
+xrandr --output DP-0 --primary --mode 1920x1080 --rate 144.01 --output HDMI-0 --mode 1920x1080 --left-of DP-0
 
 # Don't Randomly Turn off
 xset s off
